@@ -18,16 +18,18 @@ public class ServletCookie1 extends HttpServlet {
             response.setContentType("text/html");
             PrintWriter out = response.getWriter();
 
-            String n=request.getParameter("userName");
+            String n = request.getParameter("userName");
+            request.getRequestDispatcher("header.jsp").include(request, response);
             out.print("<h1>Welcome " + n + "</h1>");
 
-            Cookie ck = new Cookie("uname", n);//creating cookie object
+            Cookie ck = new Cookie("userName", n);//creating cookie object
             response.addCookie(ck);//adding cookie in the response
 
             //creating submit button
-            out.print("<form action='servlet-cookie2' method=\"post\">");
+            out.print("<form action='servlet-cookie2' method='get'>");
             out.print("<input type='submit' value='go'>");
             out.print("</form>");
+            request.getRequestDispatcher("footer.jsp").include(request, response);
 
             out.close();
 
